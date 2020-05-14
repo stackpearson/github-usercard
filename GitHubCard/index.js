@@ -2,6 +2,9 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+let apiCall = axios.get('https://api.github.com/users/stackpearson')
+
+
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -45,6 +48,45 @@ const followersArray = [];
 </div>
 
 */
+
+function createGitCards(apiData) {
+  const cardContainer = document.createElement('div')
+  const cardImg = document.createElement('img')
+  const card = document.createElement('div')
+  const cardTitle = document.createElement('h3')
+  const cardUserP = document.createElement('p')
+  const cardLocationP = document.createElement('p')
+  const cardProfileP = document.createElement('p')
+  const cardGitAddy = document.createElement('a')
+  const cardFollowersP = document.createElement('p')
+  const cardFollowingP = document.createElement('p')
+  const cardBioP = document.createElement('p')
+
+  cardContainer.classList.add('card')
+  card.classList.add('card-info')
+  cardTitle.classList.add('name')
+  cardUserP.classList.add('username')
+
+  // loading new elements to the dom
+  cardContainer.appendChild(cardImg)
+  cardContainer.appendChild(card)
+  card.appendChild(cardTitle)
+  card.appendChild(cardUserP)
+  card.appendChild(cardLocationP)
+  card.appendChild(cardProfileP)
+  cardProfileP.appendChild(cardGitAddy)
+  card.appendChild(cardFollowersP)
+  card.appendChild(cardFollowingP)
+  card.appendChild(cardBioP)
+  
+
+  return cardContainer
+}
+
+const cardComponent = createGitCards()
+const mainCardHolder = document.querySelector('.cards')
+mainCardHolder.appendChild(cardComponent)
+
 
 /* List of LS Instructors Github username's: 
   tetondan
