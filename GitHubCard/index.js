@@ -27,7 +27,14 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  'https://api.github.com/users/stackpearson',
+  'https://api.github.com/users/tetondan',
+  'https://api.github.com/users/dustinmyers',
+  'https://api.github.com/users/justsml',
+  'https://api.github.com/users/luishrd',
+  'https://api.github.com/users/bigknell'
+];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -69,6 +76,17 @@ function createGitCards(apiData) {
   cardTitle.classList.add('name')
   cardUserP.classList.add('username')
 
+  cardImg.src = apiData.avatar_url
+  cardTitle.textContent = apiData.name
+  cardUserP.textContent = apiData.login
+  cardLocationP.textContent = apiData.cardLocationP
+  cardGitAddy.setAttribute('href', apiData.html_url)
+  cardGitAddy.textContent = apiData.html_url
+  cardFollowersP.textContent = 'Followers: ' + apiData.followers
+  cardFollowingP.textContent = 'Following: ' + apiData.following
+  cardBioP.textContent = 'Bio: ' + apiData.bio
+  console.log(apiData)
+
   // adding new elements to the dom
   cardContainer.append(cardImg, card)
   card.append(cardTitle, cardUserP, cardLocationP, cardProfileP, cardFollowersP, cardFollowingP, cardBioP)
@@ -77,49 +95,33 @@ function createGitCards(apiData) {
   return cardContainer
 }
 
-//adding component to .cards div
-const cardComponent = createGitCards()
 const mainCardHolder = document.querySelector('.cards')
-mainCardHolder.appendChild(cardComponent)
 
-const imgEntry = document.querySelector('.cards img')
-const nameEntry = document.querySelector('.name');
-const usernameEntry = document.querySelector('.username')
-const locationSelector = document.querySelector('p:nth-child(3)')
-// const profileSelector = document.querySelector('p:nth-child(4)')
-const profileSelector = document.querySelector('a::before')
-const linkSelector = document.querySelector('a')
-
-const followersSelector = document.querySelector('p:nth-child(5)')
-const followingSelector = document.querySelector('p:nth-child(6)')
-const bioSelector = document.querySelector('p:nth-child(7)')
-//
-const apiCall = axios.get('https://api.github.com/users/stackpearson')
-
-
-
+axios.get('https://api.github.com/users/stackpearson')
 .then(response => {
   console.log(response.data)
-  imgEntry.src = response.data.avatar_url
-  nameEntry.textContent = response.data.name
-  usernameEntry.textContent = response.data.login
-  locationSelector.textContent = 'Location: ' + response.data.location
-  linkSelector.setAttribute('href', response.data.html_url)
-  linkSelector.textContent = 'github link'
-  followersSelector.textContent = 'Followers: ' + response.data.followers
-  followingSelector.textContent = 'Following: ' + response.data.following
-  followingSelector.textContent = 'Following: ' + response.data.following
-  bioSelector.textContent = 'Bio: ' + response.data.bio
-  })
+  mainCardHolder.append(createGitCards(response.data))
+})
 
 .catch(error => {
-  console.log('Data not returned', error)
+  console.log('ya goofed -->', error)
 })
 
 
 
 
-/* List of LS Instructors Github username's: 
+
+
+
+
+/* List of LS Instructors Github username's:
+sawyer = 'https://api.github.com/users/stackpearson',
+tetodan = 'https://api.github.com/users/tetondan',
+dustinmyers = 'https://api.github.com/users/dustinmyers',
+justsml = 'https://api.github.com/users/justsml',
+luishrd = 'https://api.github.com/users/luishrd',
+bigknell = 'https://api.github.com/users/bigknell'
+
   tetondan
   dustinmyers
   justsml
