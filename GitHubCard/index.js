@@ -28,7 +28,6 @@
 */
 
 const followersArray = [
-  'https://api.github.com/users/stackpearson',
   'https://api.github.com/users/tetondan',
   'https://api.github.com/users/dustinmyers',
   'https://api.github.com/users/justsml',
@@ -76,6 +75,7 @@ function createGitCards(apiData) {
   cardTitle.classList.add('name')
   cardUserP.classList.add('username')
 
+  //asigning content that's fed in to our function to the appropriate elements
   cardImg.src = apiData.avatar_url
   cardTitle.textContent = apiData.name
   cardUserP.textContent = apiData.login
@@ -85,7 +85,6 @@ function createGitCards(apiData) {
   cardFollowersP.textContent = 'Followers: ' + apiData.followers
   cardFollowingP.textContent = 'Following: ' + apiData.following
   cardBioP.textContent = 'Bio: ' + apiData.bio
-  console.log(apiData)
 
   // adding new elements to the dom
   cardContainer.append(cardImg, card)
@@ -96,16 +95,37 @@ function createGitCards(apiData) {
 }
 
 const mainCardHolder = document.querySelector('.cards')
-
 axios.get('https://api.github.com/users/stackpearson')
 .then(response => {
-  console.log(response.data)
+  // console.log(response.data)
   mainCardHolder.append(createGitCards(response.data))
 })
 
 .catch(error => {
   console.log('ya goofed -->', error)
 })
+
+
+followersArray.forEach(urls => {
+  axios.get(urls)
+.then(response => {
+  // console.log(response.data)
+  mainCardHolder.append(createGitCards(response.data))
+})
+
+.catch(error => {
+  console.log('ya goofed -->', error)
+})
+})
+
+//stretch - adding personal followers to the mix//
+// const myFollowersNames = [];
+// axios.get('https://api.github.com/users/stackpearson')
+// .then(response => {
+//   console.log(response.data.followers_url)
+// })
+
+
 
 
 
