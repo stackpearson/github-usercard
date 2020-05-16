@@ -10,7 +10,7 @@
 .calendar-graph text.wday,
 .calendar-graph text.month {
     font-size: 10px;
-    fill: #aaa;
+    fill: black;
 }
 
 .contrib-legend {
@@ -136,7 +136,11 @@ h2.f4.text-normal.mb-3 {
 .calendar-graph text.wday,
 .calendar-graph text.month {
     font-size: 10px;
-    fill: #aaa;
+    fill: black;
+}
+
+.text {
+    color: black !important;
 }
 
 .contrib-legend {
