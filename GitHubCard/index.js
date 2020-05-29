@@ -3,6 +3,9 @@
            https://api.github.com/users/<your name>
 */
 
+
+
+
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -24,7 +27,13 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  'https://api.github.com/users/tetondan',
+  'https://api.github.com/users/dustinmyers',
+  'https://api.github.com/users/justsml',
+  'https://api.github.com/users/luishrd',
+  'https://api.github.com/users/bigknell'
+];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -46,7 +55,93 @@ const followersArray = [];
 
 */
 
-/* List of LS Instructors Github username's: 
+function createGitCards(apiData) {
+  //declaring new elements
+  const cardContainer = document.createElement('div')
+  const cardImg = document.createElement('img')
+  const card = document.createElement('div')
+  const cardTitle = document.createElement('h3')
+  const cardUserP = document.createElement('p')
+  const cardLocationP = document.createElement('p')
+  const cardProfileP = document.createElement('p')
+  const cardGitAddy = document.createElement('a')
+  const cardFollowersP = document.createElement('p')
+  const cardFollowingP = document.createElement('p')
+  const cardBioP = document.createElement('p')
+
+  //adding classes
+  cardContainer.classList.add('card')
+  card.classList.add('card-info')
+  cardTitle.classList.add('name')
+  cardUserP.classList.add('username')
+
+  //asigning content that's fed in to our function to the appropriate elements
+  cardImg.src = apiData.avatar_url
+  cardTitle.textContent = apiData.name
+  cardUserP.textContent = apiData.login
+  cardLocationP.textContent = apiData.cardLocationP
+  cardGitAddy.setAttribute('href', apiData.html_url)
+  cardGitAddy.textContent = apiData.html_url
+  cardFollowersP.textContent = 'Followers: ' + apiData.followers
+  cardFollowingP.textContent = 'Following: ' + apiData.following
+  cardBioP.textContent = 'Bio: ' + apiData.bio
+
+  // adding new elements to the dom
+  cardContainer.append(cardImg, card)
+  card.append(cardTitle, cardUserP, cardLocationP, cardProfileP, cardFollowersP, cardFollowingP, cardBioP)
+  cardProfileP.append(cardGitAddy)
+
+  return cardContainer
+}
+
+const mainCardHolder = document.querySelector('.cards')
+axios.get('https://api.github.com/users/stackpearson')
+.then(response => {
+  // console.log(response.data)
+  mainCardHolder.append(createGitCards(response.data))
+})
+
+.catch(error => {
+  console.log('ya goofed -->', error)
+})
+
+
+followersArray.forEach(urls => {
+  axios.get(urls)
+.then(response => {
+  // console.log(response.data)
+  mainCardHolder.append(createGitCards(response.data))
+})
+
+.catch(error => {
+  console.log('ya goofed -->', error)
+})
+})
+
+//stretch - adding personal followers to the mix//
+// const myFollowersNames = [];
+// axios.get('https://api.github.com/users/stackpearson')
+// .then(response => {
+//   console.log(response.data.followers_url)
+// })
+
+
+
+
+
+
+
+
+
+
+/* List of LS Instructors Github username's:
+sawyer = 'https://api.github.com/users/stackpearson',
+tetodan = 'https://api.github.com/users/tetondan',
+dustinmyers = 'https://api.github.com/users/dustinmyers',
+justsml = 'https://api.github.com/users/justsml',
+luishrd = 'https://api.github.com/users/luishrd',
+bigknell = 'https://api.github.com/users/bigknell'
+
   tetondan
   dustinmyers
   justsml

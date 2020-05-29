@@ -4,6 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./GitHubGraph/githubcalendar.css">
+    <!--------------unpkg CDN here---------->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--------------unpkg CDN here---------->
   </head>
   <body>
     <div class="container">
@@ -12,10 +16,14 @@
         <p>❤️'s</p>
         <img src="./assets/githublogo.png" alt="GitHub Logo" />
       </div>
+      <div class="calendar">
+        Hang on a sec while we load some stuff for you
+      </div>
       <div class="cards"></div>
     </div>
-    <!-- TODO: add CDN library here -->
     <script src="./GitHubCard/index.js"></script>
+    <script src="./GitHubGraph/graph.js">
+</script>
   </body>
 </html>
 <!-- Do NOT change anything here except TODO line -->
